@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-xs-center">Editing <%= @employee.name.titleize %></h1>
+
+<ul class="breadcrumb" style="background: none">
+	<li><%= link_to "Home", root_path %></li>
+	<li><%= link_to "Locations", locations_path %></li>
+	<li><%= link_to "Newton", location_path(@location) %></li>
+	<li><%= link_to "Employees", location_employees_path(@location) %></li>
+	<li class="active"><%= "Edit #{@employee.name.titleize}" %></li>
+</ul>
+
+<%= render 'form' %>

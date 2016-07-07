@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-xs-center">New Location</h1>
+
+<ul class="breadcrumb" style="background: none">
+	<li><%= link_to "Home", root_path %></li>
+	<li><%= link_to "Locations", locations_path %></li>
+	<li class="active">New Location</li>
+</ul>
+
+
+<%= render 'form' %>
+
+<%= link_to 'Back', locations_path %>

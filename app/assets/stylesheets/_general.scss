@@ -1,0 +1,30 @@
+body {
+	font-family: "open sans" !important;	
+//	font-family: "arial";	
+}
+
+a {
+	&:hover,
+	&:focus {
+		text-decoration: none !important;
+		outline: none !important;
+	}
+}
+
+table {
+	thead {
+		th {
+			text-align: center;
+		}
+	}
+}
+
+.text-white {
+	color: white;
+	&:hover {
+		color: white;
+	}
+}
+.table-action {
+	width: 1px;
+}

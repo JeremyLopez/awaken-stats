@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-xs-center">Editing Location</h1>
+
+<ul class="breadcrumb" style="background: none">
+	<li><%= link_to "Home", root_path %></li>
+	<li><%= link_to "Locations", locations_path %></li>
+	<li><%= link_to "Peabody", location_path(@location) %></li>
+	<li class="active">Edit <%= @location.name %></li>
+</ul>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @location %> |
+<%= link_to 'Back', locations_path %>

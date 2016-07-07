@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-xs-center"><%= @location.name.titleize %> Employees</h1>
+
+<ul class="breadcrumb" style="background: none">
+	<li><%= link_to "Home", root_path %></li>
+	<li><%= link_to "Locations", locations_path %></li>
+	<li class="active"><%= @location.name.titleize %></li>
+</ul>
+
+<div class="container-fluid col-xs-10 col-xs-offset-1 m-y-2">
+	<% if @employees.length == 0 %>
+		<h2 class="text-xs-center">No employees found</h2>
+	<% else %>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Location</th>
+					<th colspan="2" class="text-xs-center">Actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @employees.each do |employee| %>
+					<tr>
+						<td><%= link_to employee.name.titleize, location_employee_path(@location, employee) %></td>
+						<td><%= employee.phone %></td>
+						<td><%= employee.email %></td>
+						<td><%= employee.location.name %></td>
+						<td class="table-action"><%= link_to 'Edit', edit_location_employee_path(@location, employee) %></td>
+						<td class="table-action"><%= link_to 'Destroy', location_employee_path(@location, employee), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% end %>
+</div>
+
+<div class="col-xs-12 text-xs-center">
+	<button class="btn btn-primary"><%= link_to 'New Employee', new_location_employee_path(@location), class: "text-white" %></button>
+	<button class="btn btn-primary"><%= link_to "Edit #{@location.name}", edit_location_path(@location), class: "text-white" %></button>
+</div>
