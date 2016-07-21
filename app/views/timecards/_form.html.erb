@@ -1,0 +1,20 @@
+<%= simple_form_for(@timecard) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :employee %>
+    <%= f.input :user_id %>
+    <%= f.input :regular %>
+    <%= f.input :overtime %>
+    <%= f.input :doubletime %>
+    <%= f.input :sick %>
+    <%= f.input :vacation %>
+    <%= f.input :holiday %>
+    <%= f.input :personal %>
+    <%= f.input :other %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

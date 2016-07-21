@@ -13,17 +13,25 @@
 			</div>
 		<% end %>
 
-		<div class="form-group">
-			<%= f.label :name %><br>
-			<%= f.text_field :name, class: "form-control" %>
+		<div class="form-group label-floating">
+			<%= f.label :name, class: "control-label" %>
+			<%= f.text_field :name, :autofocus => true , class: "form-control" %>
 		</div>
-		<div class="form-group">
-			<%= f.label :phone %><br>
-			<%= f.text_field :phone, class: "form-control" %>
+		<div class="form-group label-floating" id="test">
+			<%= f.label :phone, class: "control-label" %>
+			<%= f.text_field :phone, class: "form-control", placeholder: "" %>
 		</div>
-		<div class="form-group">
-			<%= f.label :email %><br>
+		<div class="form-group label-floating">
+			<%= f.label :email, class: "control-label" %>
 			<%= f.text_field :email, class: "form-control" %>
+		</div>
+		<div class="form-group label-floating">
+			<%= f.label :user_id, class: "control-label" %>
+			<%= f.text_field :user_id, class: "form-control" %>
+		</div>
+		<div class="form-group label-floating">
+			<%= f.label :timecard_id, class: "control-label" %>
+			<%= f.number_field :user_id, class: "form-control" %>
 		</div>
 		
 		<div class="actions">
@@ -32,3 +40,11 @@
 		
 	<% end %>
 </div>
+
+<script>
+	$(".form-control").each(function() {
+		if ( $(this).val() == "" ) {
+			$(this).parent().addClass("is-empty");
+		}
+	})
+</script>

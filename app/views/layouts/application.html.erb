@@ -4,11 +4,42 @@
   <title>AwakenStats</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "https://use.fontawesome.com/9e27daa1cf.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="container-fluid">
+	<div class="row">
+		<ul class="navigation">
+			<li><button class="btn-link"><i class="fa fa-home text-white nav-glyph" aria-hidden="true"></i><%= link_to "Home", root_path, title: "-----Home" %></button></li>
+			<li><button class="btn-link"><i class="fa fa-users text-white nav-glyph" aria-hidden="true"></i><%= link_to "Employees", fetch_employees_path, title: "-----Employees" %></button></li>
+			<li><button class="btn-link"><i class="fa fa-map-o text-white nav-glyph" aria-hidden="true"></i><%= link_to "Locations", locations_path, title: "-----lLocations" %></button></li>
+			<li><button class="btn-link"><i class="fa fa-clock-o text-white nav-glyph" aria-hidden="true"></i><%= link_to "Timecards", timecards_path, title: "-----Timecards" %></button></li>
+			<li><button class="btn-link"><i class="fa fa-money text-white nav-glyph" aria-hidden="true"></i><%= link_to "Payrolls", payrolls_path, title: "-----Payrolls" %></button></li>
+		</ul>
+	</div>
+</div>
+
+<div class="normal-body main-raised">
+	<div class="section section-basic">
+		<%= yield %>
+	</div>
+</div>
+
+<footer class="footer">
+	<div class="container">
+		<nav>
+			<ul>
+				<li><%= link_to "Home", root_path %></li>
+				<li><%= link_to "Employees", fetch_employees_path, title: "Employees" %></li>
+				<li><%= link_to "Locations", locations_path, title: "Locations" %></li>
+				<li><%= link_to "Timecards", timecards_path, title: "Timecards" %></li>
+				<li class="pull-xs-right"><%= link_to "Awaken180° Weightloss", "http://www.awaken180weightloss.com" %></li>
+			</ul>
+		</nav>
+	</div>
+</footer>
 
 </body>
 </html>

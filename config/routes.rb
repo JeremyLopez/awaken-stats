@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 	
+  resources :payrolls
+  resources :timecards
 	get '/employees' => 'employees#employees', as: :fetch_employees
+	get '/make_manager/:id' => 'employees#assign_manager', as: :set_manager
+	get '/fire_employee/:id' => 'employees#toggle_fire_employee', as: :toggle_fire
+	
+	post '/bulk_upload_timecards/:file' => 'timecards#bulk_upload', as: :import_timecard
+	
+	post '/check_timecard' => 'timecards#check_file', as: :check_timecard
 	
   
   resources :locations do

@@ -1,0 +1,121 @@
+<h1 class="text-xs-center">Listing Timecards</h1>
+
+<%= console %>
+
+<% if flash[:notice].is_a? String %>
+	<%= flash[:notice] %>
+<% elsif flash[:notice].is_a? Array %>
+	<div class="container">
+		<div class="col-xs-10 col-xs-offset-1">
+			<table class="table table-hover table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Regular</th>
+						<th>Overtime</th>
+						<th>Sick</th>
+						<th>Vacation</th>
+						<th>Holiday</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% notice[0].each do |success| %>
+					<tr>
+						<td style="color: green"><%= success[0] %></td>
+						<% success[1].each do |type| %>
+						<td><%= type %></td>
+						<% end %>
+					</tr>
+					<% end %>
+					<% notice[1].each do |failure| %>
+					<tr>
+						<td style="color: red"><%= failure[0] %></td>
+						<td><%= success[1] %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="container-fluid">
+			<div class="col-xs-12 col-md-6 col-md-offset-3 text-xs-center">
+				<div class="card card-nav-tabs">
+					<div class="header header-info">
+						Import Timecard and Send Email
+					</div>
+					<div class="content">
+					
+						<button class="btn btn-primary btn-raised"><%= link_to "Import", import_timecard_path(@file), :method => :post, style: "color: white"  %></button>
+<!--
+						<%# form_tag import_timecard_path, multipart: true do %>
+							<%# file_field :file, params[:checked_file], class: "btn" %>
+							<%# collection_select :timecard, :payroll_id, Payroll.all, :id, :dates %>
+							<%# submit_tag "Import", class: "btn btn-primary btn-raised" %>
+						<%# end %>
+-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>
+
+<div class="container-fluid">
+	<div class="col-xs-12 m-y-2">
+		<table class="table table-striped table-bordered table-hover" id="timecard-index">
+			<thead>
+				<tr>
+					<th>Employee</th>
+					<th>User</th>
+					<th>Regular</th>
+					<th>Overtime</th>
+<!--					<th>Doubletime</th>-->
+					<th>Sick</th>
+					<th>Vacation</th>
+					<th>Holiday</th>
+<!--					<th>Personal</th>-->
+<!--					<th>Other</th>-->
+					<th>Action</th>
+					<th>Action</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @timecards.each do |timecard| %>
+					<tr>
+						<td><%= link_to timecard.employee.name, location_employee_path(timecard.employee.location_id, timecard.employee) %></td>
+						<td><%= timecard.user_id %></td>
+						<td><%= timecard.regular %></td>
+						<td><%= timecard.overtime %></td>
+<!--						<td><%# timecard.doubletime %></td>-->
+						<td><%= timecard.sick %></td>
+						<td><%= timecard.vacation %></td>
+						<td><%= timecard.holiday %></td>
+<!--						<td><%# timecard.personal %></td>-->
+<!--						<td><%# timecard.other %></td>-->
+						<td><%= link_to 'Show', timecard %></td>
+						<td><%= link_to 'Edit', edit_timecard_path(timecard) %></td>
+						<td><%= link_to 'Destroy', timecard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="col-xs-12 col-md-6 col-md-offset-3 text-xs-center">
+		<div class="card card-nav-tabs">
+			<div class="header header-info">
+				Validate Timecard File
+			</div>
+			<div class="content">
+				<%= form_tag check_timecard_path, multipart: true do %>
+					<%= file_field_tag :file, class: "btn" %>
+					<%= submit_tag "Validate", class: "btn btn-primary btn-raised" %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

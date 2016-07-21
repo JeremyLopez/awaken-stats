@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-xs-center"><%= @location.name.titleize %></h1>
+
+<ul class="breadcrumb" style="background: none">
+	<li><%= link_to "Home", root_path %></li>
+	<li><%= link_to "Locations", locations_path %></li>
+	<li class="active"><%= @location.name.titleize %></li>
+</ul>
+
+<div class="container-fluid">
+	<div>
+		<p>
+			<strong>Employees:</strong>
+			<%= @employees.length %>
+		</p>
+	</div>
+
+	<div>
+		<p>
+			<strong>Manager:</strong>
+			<% if @manager.present? %>
+				<%= link_to @manager.name, location_employee_path(@location, @manager) %>
+			<% else %>
+				Please select a manager below:
+		</p>
+		<ul>
+			<% @employees.each do |employee| %>
+				<li><%= link_to employee.name, set_manager_path(employee) %></li>
+			<% end %>
+		</ul>
+			<% end %>
+	</div>
+</div>
+
+<div class="col-xs-12 text-xs-center">
+	<button class="btn btn-primary btn-raised"><%= link_to 'See Employees', location_employees_path(@location), class: "text-white" %></button>
+	<button class="btn btn-primary btn-raised"><%= link_to "Edit #{@location.name}", edit_location_path(@location), class: "text-white" %></button>
+</div>

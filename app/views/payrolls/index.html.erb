@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-xs-center">Listing Payrolls</h1>
+
+<div class="container-fluid">
+	<div class="col-xs-10 col-xs-offset-1 m-y-2">
+		<table class="table table-hover table-striped table-bordered location-table">
+			<thead>
+				<tr>
+					<th>Start date</th>
+					<th>End date</th>
+					<th>Has Timecards?</th>
+					<th>1</th>
+					<th>2</th>
+					<th>3</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @payrolls.each do |payroll| %>
+					<tr>
+						<td><%= payroll.start_date %></td>
+						<td><%= payroll.end_date %></td>
+						<td><%= payroll.timecards.present? %></td>
+						<td><%= link_to 'Show', payroll %></td>
+						<td><%= link_to 'Edit', edit_payroll_path(payroll) %></td>
+						<td><%= link_to 'Destroy', payroll, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="col-xs-12 text-xs-center">
+	<button class="btn btn-primary btn-raised"><%= link_to 'New Payroll', new_payroll_path, class: "text-white" %></button>
+</div>
+
+

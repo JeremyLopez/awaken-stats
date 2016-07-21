@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @timecard.employee %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @timecard.user_id %>
+</p>
+
+<p>
+  <strong>Regular:</strong>
+  <%= @timecard.regular %>
+</p>
+
+<p>
+  <strong>Overtime:</strong>
+  <%= @timecard.overtime %>
+</p>
+
+<p>
+  <strong>Doubletime:</strong>
+  <%= @timecard.doubletime %>
+</p>
+
+<p>
+  <strong>Sick:</strong>
+  <%= @timecard.sick %>
+</p>
+
+<p>
+  <strong>Vacation:</strong>
+  <%= @timecard.vacation %>
+</p>
+
+<p>
+  <strong>Holiday:</strong>
+  <%= @timecard.holiday %>
+</p>
+
+<p>
+  <strong>Personal:</strong>
+  <%= @timecard.personal %>
+</p>
+
+<p>
+  <strong>Other:</strong>
+  <%= @timecard.other %>
+</p>
+
+<%= link_to 'Edit', edit_timecard_path(@timecard) %> |
+<%= link_to 'Back', timecards_path %>

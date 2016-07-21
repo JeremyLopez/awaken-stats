@@ -10,9 +10,69 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+ *= require jquery-ui
  */
 
-@import "general";
+//@import "scaffolds";
 @import "bootstrap";
+//@import "dataTables";
+//@import "jquery.dataTables";
+//@import "dataTables.bootstrap";
+@import "material-kit";
+@import "demo";
+@import "general";
 
 
+
+.navigation {
+	background-color: #9c27b0;
+	color: white;
+	border-radius: 0px 0px 3px 3px;
+	box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	
+	li {
+		list-style: none;
+		padding: 1em;
+		display: inline-block;
+	}
+	
+	button {
+		font-weight: 500;
+		transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+		
+		&:hover {
+			font-weight: 700;
+			transition: all 0.2s cubic-bezier(0.4, 0, 1, 1);
+		}
+	}
+	
+	a {
+		color: white;
+		text-decoration: none;
+		
+		&::after {
+			display:block;
+			content:attr(title);
+			font-weight:bold;
+			height:1px;
+			color:transparent;
+			overflow:hidden;
+			visibility:hidden;
+			margin-bottom:-1px;
+		}
+	}
+}
+
+.normal-body {
+	padding-top: 80px;
+	background-color: white;
+}
+
+.nav-glyph {
+	padding-right: 0.5em;
+}

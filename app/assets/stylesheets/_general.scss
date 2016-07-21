@@ -1,6 +1,15 @@
 body {
 	font-family: "open sans" !important;	
-//	font-family: "arial";	
+	background-color: white;
+	background-color: #0ab1fc;
+}
+
+.btn-link {
+	&:hover,
+	&:focus {
+		text-decoration: none !important;
+		outline: none !important;
+	}
 }
 
 a {
@@ -9,6 +18,10 @@ a {
 		text-decoration: none !important;
 		outline: none !important;
 	}
+}
+
+.jumbotron {
+	background-color: white;
 }
 
 table {
@@ -25,6 +38,42 @@ table {
 		color: white;
 	}
 }
+
+.terminated-true {
+	color: red;
+}
+
 .table-action {
 	width: 1px;
+}
+
+table.dataTable thead .sorting:after {
+	content: "\f0dc" !important;
+	font-family: "FontAwesome" !important;
+}
+
+table.dataTable thead .sorting_asc:after {
+	content: "\f160" !important;
+	color: #9c27b0;
+	line-height: 33px;
+	opacity: 1;
+	font-family: "FontAwesome" !important;
+}
+
+table.dataTable thead .sorting_desc:after {
+	content: "\f161" !important;
+	color: #9c27b0;
+	opacity: 1;
+	line-height: 33px;
+	font-family: "FontAwesome" !important;
+}
+
+.Lookhere {
+	width: 200px;
+}
+
+
+
+.breadcrumb {
+	background: none;
 }

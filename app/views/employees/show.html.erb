@@ -31,6 +31,68 @@
 		<strong>Location:</strong>
 		<%= link_to @employee.location.name, location_path(@location) %>
 	</p>
+	
+	<p>
+		<strong>Terminated:</strong>
+		<%= @employee.terminated %>
+	</p>
+	
+	<p>
+		<strong>Timecard ID:</strong>
+		<%= @employee.user_id %>
+	</p>
+</div>
+
+<div class="col-xs-12 text-xs-center">
+	<button class="btn btn-primary btn-raised"><%= link_to 'Edit Employee', edit_location_employee_path(@location, @employee), class: "text-white" %></button>
+</div>
+
+<div class="container-fluid">
+	<div class="col-xs-12 m-y-2">
+		<table class="table table-striped table-bordered table-hover timecard-index" id="timecard-index">
+			<thead>
+				<tr>
+					<th>Start</th>
+					<th>End</th>
+					<th>Employee</th>
+					<th>User</th>
+					<th>Reg</th>
+					<th>O/T</th>
+<!--					<th>D/T</th>-->
+					<th>Sick</th>
+					<th>Vaca</th>
+					<th>Holiday</th>
+<!--					<th>Personal</th>-->
+<!--					<th>Other</th>-->
+					<th>1</th>
+					<th>2</th>
+					<th>3</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @timecards.each do |timecard| %>
+					<tr>
+						<td><%= timecard.start_date.strftime("%m/%d/%Y") %></td>
+						<td><%= timecard.end_date.strftime("%m/%d/%Y") %></td>
+						<td><%= timecard.employee.name %></td>
+						<td><%= timecard.user_id %></td>
+						<td><%= timecard.regular %></td>
+						<td><%= timecard.overtime %></td>
+<!--						<td><%# timecard.doubletime %></td>-->
+						<td><%= timecard.sick %></td>
+						<td><%= timecard.vacation %></td>
+						<td><%= timecard.holiday %></td>
+<!--						<td><%# timecard.personal %></td>-->
+<!--						<td><%# timecard.other %></td>-->
+						<td class="table-action"><%= link_to 'Show', timecard %></td>
+						<td class="table-action"><%= link_to 'Edit', edit_timecard_path(timecard) %></td>
+						<td class="table-action"><%= link_to 'Destroy', timecard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
 </div>
 
 

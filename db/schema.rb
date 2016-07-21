@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707182530) do
+ActiveRecord::Schema.define(version: 20160720175415) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "employees", force: :cascade do |t|
     t.string   "name"
@@ -22,9 +25,11 @@ ActiveRecord::Schema.define(version: 20160707182530) do
     t.datetime "updated_at",                  null: false
     t.string   "slug"
     t.boolean  "manager",     default: false
+    t.boolean  "terminated",  default: false
+    t.integer  "user_id"
   end
 
-  add_index "employees", ["location_id"], name: "index_employees_on_location_id"
+  add_index "employees", ["location_id"], name: "index_employees_on_location_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -34,10 +39,10 @@ ActiveRecord::Schema.define(version: 20160707182530) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -46,4 +51,31 @@ ActiveRecord::Schema.define(version: 20160707182530) do
     t.string   "slug"
   end
 
+  create_table "payrolls", force: :cascade do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "timecards", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.integer  "user_id"
+    t.float    "regular"
+    t.float    "overtime"
+    t.float    "doubletime"
+    t.float    "sick"
+    t.float    "vacation"
+    t.float    "holiday"
+    t.float    "personal"
+    t.float    "other"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "payroll_id"
+  end
+
+  add_index "timecards", ["employee_id"], name: "index_timecards_on_employee_id", using: :btree
+
+  add_foreign_key "employees", "locations"
+  add_foreign_key "timecards", "employees"
 end

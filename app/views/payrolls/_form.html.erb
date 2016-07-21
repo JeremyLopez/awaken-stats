@@ -1,0 +1,30 @@
+<%= simple_form_for(@payroll) do |f| %>
+  <%= f.error_notification %>
+  
+  <div class="form-group label-floating">
+		<label class="control-label">Start Date</label>
+    <%= f.text_field :start_date, class: "datepicker form-control" %>
+  </div>
+  
+  <div class="form-group label-floating">
+  	<%= f.label :end_date, class: "control-label" %>
+    <%= f.text_field :end_date, class: "datepicker form-control" %>
+  </div>
+  
+  <div class="form-actions text-xs-center">
+    <%= f.button :submit, class: "btn btn-primary btn-raised" %>
+  </div>
+<% end %>
+
+<script>
+		$(".datepicker").datepicker({
+			autoclose: true,
+			format: "dd/mm/yyyy"
+		});
+		
+		$('.datepicker').on('changeDate', function(ev){
+			console.log("changed date");
+			$(this).datepicker('hide');
+			$(this).parent(".label-floating").first().removeClass("is-empty");
+		});
+</script>

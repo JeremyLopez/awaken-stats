@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @payroll.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @payroll.end_date %>
+</p>
+
+<div class="container-fluid">
+	<div class="col-xs-12 m-y-2">
+		<table class="table table-striped table-bordered table-hover" id="timecard-index">
+			<thead>
+				<tr>
+					<th>Employee</th>
+					<th>User</th>
+					<th>Regular</th>
+					<th>Overtime</th>
+<!--					<th>Doubletime</th>-->
+					<th>Sick</th>
+					<th>Vacation</th>
+					<th>Holiday</th>
+<!--					<th>Personal</th>-->
+<!--					<th>Other</th>-->
+					<th>Action</th>
+					<th>Action</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% @timecards.each do |timecard| %>
+					<tr>
+						<td><%= link_to timecard.employee.name, location_employee_path(timecard.employee.location_id, timecard.employee) %></td>
+						<td><%= timecard.user_id %></td>
+						<td><%= timecard.regular %></td>
+						<td><%= timecard.overtime %></td>
+<!--						<td><%# timecard.doubletime %></td>-->
+						<td><%= timecard.sick %></td>
+						<td><%= timecard.vacation %></td>
+						<td><%= timecard.holiday %></td>
+<!--						<td><%# timecard.personal %></td>-->
+<!--						<td><%# timecard.other %></td>-->
+						<td><%= link_to 'Show', timecard %></td>
+						<td><%= link_to 'Edit', edit_timecard_path(timecard) %></td>
+						<td><%= link_to 'Destroy', timecard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,21 +1,52 @@
 class EmployeesController < ApplicationController
-	before_action :set_location, except: [:employees]
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
+	before_action :set_location, except: [:employees, :assign_manager, :toggle_fire_employee]
+  before_action :set_employee, only: [:toggle_fire_employee, :assign_manager, :show, :edit, :update, :destroy]
 
   # GET /employees
   # GET /employees.json
   def index
-    @employees = @location.employees.all
+    @employees = @location.employees.all.order("manager DESC")
   end
+	
+	def assign_manager
+		@current_manager = @employee.location.employees.where(manager: true).first
+		if @employee.manager == true
+			@employee.update_column(:manager, false)
+		elsif @current_manager.present? && @employee.manager == false
+			@current_manager.update_column(:manager, false)
+			@employee.update_column(:manager, true)
+			@current_manager.save
+		else
+			@employee.update_column(:manager, true)
+		end
+		@employee.save
+		redirect_to location_employees_path(@employee.location)
+	end
+	
+	def toggle_fire_employee
+		if @employee.terminated?
+			@employee.update_column(:terminated, false)
+		else
+			@employee.update_column(:terminated, true)
+		end
+		@employee.save
+		redirect_to location_employees_path(@employee.location)
+	end
 	
 	def employees
 		@locations = Location.all
 		@staff = Employee.getEmployees(@locations)
+#		@staff.each do |k, v|
+#			v.order("manager DESC")
+#			puts "HERE"
+#			puts v.inspect
+#		end
 	end
 
   # GET /employees/1
   # GET /employees/1.json
   def show
+		@timecards = @employee.timecards
   end
 
   # GET /employees/new
@@ -51,7 +82,7 @@ class EmployeesController < ApplicationController
   def update
     respond_to do |format|
       if @employee.update(employee_params)
-        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
+        format.html { redirect_to location_employee_path(@location, @employee), notice: 'Employee was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee }
       else
         format.html { render :edit }
@@ -82,6 +113,6 @@ class EmployeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:name, :phone, :email, :location_id, :manager)
+      params.require(:employee).permit(:name, :phone, :email, :location_id, :manager, :user_id)
     end
 end

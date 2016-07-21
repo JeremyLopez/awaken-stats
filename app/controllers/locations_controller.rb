@@ -4,19 +4,19 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.all
+    @locations = Location.all.order("name ASC")
   end
 
   # GET /locations/1
   # GET /locations/1.json
   def show
-		@employees = @location.employees.all
-		render "employees/index"
+		@employees = @location.employees.all.order("manager DESC")
+		@manager = @location.employees.where(manager: true).first
+#		render "employees/index"
   end
 
   # GET /locations/new
   def new
-		puts "New item..."
     @location = Location.new
   end
 

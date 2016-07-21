@@ -9,7 +9,8 @@
 	<li class="active">Edit <%= @location.name %></li>
 </ul>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @location %> |
-<%= link_to 'Back', locations_path %>
+<div class="container-fluid">
+	<div class="col-xs-12">
+		<%= render 'form' %>
+	</div>
+</div>

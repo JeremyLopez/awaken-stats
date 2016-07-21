@@ -3,7 +3,7 @@ namespace :update_employee do
 	
 	task :fill_in_manager => :environment do
 		Employee.where(manager: nil).each do |t|
-			t.update_column :manager, false
+			t.update_column :terminated, false
 		end
 	end
 end

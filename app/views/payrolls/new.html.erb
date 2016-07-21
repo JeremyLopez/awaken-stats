@@ -1,0 +1,13 @@
+<h1 class="text-xs-center">New Payroll</h1>
+
+<ul class="breadcrumb">
+	<li><%= link_to "Home", root_path %></li>
+	<li><%= link_to "Payrolls", payrolls_path %></li>
+	<li class="active">New Payroll</li>
+</ul>
+
+<div class="container-fluid">
+	<div class="col-xs-6 col-xs-offset-3">
+		<%= render 'form' %>
+	</div>
+</div>
